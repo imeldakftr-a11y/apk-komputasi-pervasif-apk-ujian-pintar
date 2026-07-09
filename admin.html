@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Ujian | Admin Soal</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+  <script src="js/theme.js"></script>
+</head>
+<body class="admin-page">
+
+  <button class="btn-theme-toggle-fixed" id="theme-toggle-btn" onclick="toggleTheme()">🌙 Gelap</button>
+
+  <!-- ===== GERBANG PASSWORD DOSEN ===== -->
+  <div class="login-card" id="admin-gate">
+    <div class="login-header">
+      <div class="login-logo">🛠️</div>
+      <h1>Panel Admin Dosen</h1>
+      <p class="subtitle">Kelola soal ujian tanpa perlu edit kode</p>
+    </div>
+
+    <div id="gate-error" class="alert alert-error hidden"></div>
+
+    <div class="form-group">
+      <label>🔑 Password Admin</label>
+      <input type="password" id="admin-password" placeholder="Masukkan password admin" autocomplete="off"/>
+    </div>
+
+    <button class="btn-primary" onclick="handleAdminLogin()">Masuk ke Panel 🔓</button>
+
+    <div class="login-footer">
+      <a href="index.html">&larr; Kembali ke halaman login mahasiswa</a>
+    </div>
+  </div>
+
+  <!-- ===== PANEL ADMIN (tersembunyi sampai login berhasil) ===== -->
+  <div class="admin-wrap hidden" id="admin-panel">
+    <div class="admin-topbar">
+      <div>
+        <h1>🛠️ Panel Admin Soal Ujian</h1>
+        <p class="subtitle">Tambah, ubah, atau hapus soal secara langsung. Perubahan otomatis tersimpan di browser ini.</p>
+      </div>
+      <div class="admin-topbar-actions">
+        <a class="btn-secondary" href="index.html">👀 Lihat Halaman Login</a>
+        <button class="btn-secondary" onclick="handleAdminLogout()">🚪 Keluar</button>
+      </div>
+    </div>
+
+    <div id="admin-alert" class="alert hidden"></div>
+
+    <div class="admin-grid">
+      <!-- FORM TAMBAH / EDIT SOAL -->
+      <div class="admin-card">
+        <h2 id="form-title">➕ Tambah Soal Baru</h2>
+
+        <div class="form-group">
+          <label>Pertanyaan</label>
+          <textarea id="f-text" rows="3" placeholder="Tulis pertanyaan di sini..."></textarea>
+        </div>
+
+        <div class="form-group option-row" data-idx="0">
+          <label>Opsi A</label>
+          <div class="option-input-line">
+            <input type="radio" name="f-correct" value="0" id="f-correct-0" checked/>
+            <input type="text" id="f-opt-0" placeholder="Jawaban opsi A"/>
+          </div>
+        </div>
+        <div class="form-group option-row" data-idx="1">
+          <label>Opsi B</label>
+          <div class="option-input-line">
+            <input type="radio" name="f-correct" value="1" id="f-correct-1"/>
+            <input type="text" id="f-opt-1" placeholder="Jawaban opsi B"/>
+          </div>
+        </div>
+        <div class="form-group option-row" data-idx="2">
+          <label>Opsi C</label>
+          <div class="option-input-line">
+            <input type="radio" name="f-correct" value="2" id="f-correct-2"/>
+            <input type="text" id="f-opt-2" placeholder="Jawaban opsi C"/>
+          </div>
+        </div>
+        <div class="form-group option-row" data-idx="3">
+          <label>Opsi D</label>
+          <div class="option-input-line">
+            <input type="radio" name="f-correct" value="3" id="f-correct-3"/>
+            <input type="text" id="f-opt-3" placeholder="Jawaban opsi D"/>
+          </div>
+        </div>
+        <small>Pilih bulatan di samping opsi yang merupakan jawaban benar.</small>
+
+        <div class="form-group" style="margin-top:14px;">
+          <label>Penjelasan Jawaban (opsional)</label>
+          <textarea id="f-explanation" rows="2" placeholder="Penjelasan singkat kenapa jawaban itu benar..."></textarea>
+        </div>
+
+        <div class="admin-form-actions">
+          <button class="btn-primary" id="save-btn" onclick="saveQuestion()">💾 Simpan Soal</button>
+          <button class="btn-secondary hidden" id="cancel-edit-btn" onclick="cancelEdit()">Batal Edit</button>
+        </div>
+      </div>
+
+      <!-- DAFTAR SOAL -->
+      <div class="admin-card">
+        <div class="admin-list-header">
+          <h2>📋 Daftar Soal (<span id="question-count">0</span>)</h2>
+          <button class="btn-danger-outline" onclick="resetToDefault()">↺ Reset ke Soal Default</button>
+        </div>
+        <div id="question-list" class="question-list"></div>
+      </div>
+    </div>
+
+    <!-- HASIL UJIAN SISWA -->
+    <div class="admin-card" style="margin-top:20px;">
+      <div class="admin-list-header">
+        <h2>📊 Hasil Ujian Siswa (<span id="result-count">0</span>)</h2>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-secondary" onclick="exportResultsCSV()">⬇️ Export CSV</button>
+          <button class="btn-danger-outline" onclick="clearAllResults()">🗑️ Hapus Semua</button>
+        </div>
+      </div>
+      <div id="results-list"></div>
+    </div>
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
