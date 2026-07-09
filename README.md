@@ -9,7 +9,6 @@ Platform ujian online mini dengan fitur **pengawasan cerdas berbasis Web API**
 penyimpanan soal & hasil ujian secara terpusat, lengkap dengan **panel admin**
 untuk dosen.
 
-> 📖 Butuh panduan penggunaan langkah-demi-langkah? Lihat **[MANUAL_BOOK.md](./MANUAL_BOOK.md)**.
 
 ---
 
@@ -198,9 +197,7 @@ dicoba. Hasil ujian yang gagal terkirim ke server juga disimpan cadangan di
 | Soal balik ke versi lama | Server PHP tidak terjangkau → cek `api/soal.php` bisa diakses |
 | Mahasiswa tidak bisa login padahal data benar | NIM ada di blacklist browser tsb → buka blokir lewat `admin.html` |
 
-Panduan troubleshooting lebih lengkap ada di **[MANUAL_BOOK.md](./MANUAL_BOOK.md#8-troubleshooting)**.
 
----
 
 ## 📖 Dokumentasi Lengkap
 
