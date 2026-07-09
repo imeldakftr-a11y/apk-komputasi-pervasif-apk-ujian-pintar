@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Ujian | Peraturan Ujian</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/rules.css"/>
+</head>
+<body class="rules-page">
+
+  <div class="rules-bg">
+    <div class="rules-blob rb1"></div>
+    <div class="rules-blob rb2"></div>
+    <div class="rules-blob rb3"></div>
+  </div>
+
+  <div class="rules-wrap">
+
+    <!-- Header -->
+    <div class="rules-header">
+      <div class="rules-mascot">🤖</div>
+      <div class="rules-header-text">
+        <div class="rules-greeting" id="greeting-text">Halo! 👋</div>
+        <div class="rules-subtitle">Sebelum memulai ujian, baca peraturan berikut ya!</div>
+      </div>
+    </div>
+
+    <!-- Chatbot bubble intro -->
+    <div class="chat-wrap">
+      <div class="chat-bot">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble bot-bubble">
+          Hai <strong id="student-name-chat"></strong>! Saya adalah <strong>ExamBot</strong>, asisten ujian kamu hari ini. 
+          Saya akan memantau aktivitas kamu selama ujian berlangsung. 
+          Yuk pahami dulu peraturannya! 📋
+        </div>
+      </div>
+      <div class="chat-bot" style="animation-delay:0.3s">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble bot-bubble">
+          Ujian ini terdiri dari <strong>5 soal pilihan ganda</strong> dengan waktu <strong>10 menit</strong>. 
+          Saya akan terus memantau kamu ya! 👀
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules list -->
+    <div class="rules-card">
+      <div class="rules-card-title">📜 Peraturan Ujian</div>
+
+      <div class="rule-item" style="animation-delay:0.1s">
+        <div class="rule-num">1</div>
+        <div class="rule-content">
+          <div class="rule-title">⏱️ Durasi Ujian 10 Menit</div>
+          <div class="rule-desc">Kerjakan semua soal dalam waktu yang telah ditentukan. Timer akan berjalan otomatis saat ujian dimulai dan tidak bisa dijeda.</div>
+        </div>
+      </div>
+
+      <div class="rule-item" style="animation-delay:0.15s">
+        <div class="rule-num">2</div>
+        <div class="rule-content">
+          <div class="rule-title">🔖 Dilarang Pindah Tab</div>
+          <div class="rule-desc">Sistem mendeteksi perpindahan tab browser secara otomatis. Pindah tab maksimal <strong>2 kali</strong> — jika lebih, ujian langsung diblokir permanen.</div>
+        </div>
+      </div>
+
+      <div class="rule-item" style="animation-delay:0.2s">
+        <div class="rule-num">3</div>
+        <div class="rule-content">
+          <div class="rule-title">😴 Dilarang AFK (Away From Keyboard)</div>
+          <div class="rule-desc">Jika tidak ada aktivitas selama <strong>10 detik</strong>, sistem mendeteksi kamu AFK. Akan muncul countdown 10 detik — jika tidak ada gerakan, ujian otomatis dikumpulkan.</div>
+        </div>
+      </div>
+
+      <div class="rule-item" style="animation-delay:0.25s">
+        <div class="rule-num">4</div>
+        <div class="rule-content">
+          <div class="rule-title">🚫 Dilarang Menyalin Soal</div>
+          <div class="rule-desc">Tombol Ctrl+C, Ctrl+A, klik kanan, dan fitur copy lainnya dinonaktifkan selama ujian berlangsung.</div>
+        </div>
+      </div>
+
+      <div class="rule-item" style="animation-delay:0.3s">
+        <div class="rule-num">5</div>
+        <div class="rule-content">
+          <div class="rule-title">🔒 Akun Diblokir Jika Melanggar</div>
+          <div class="rule-desc">Jika ujian diblokir karena pelanggaran, akun kamu akan tercatat dan tidak bisa login ulang di browser ini. Hubungi pengawas jika ada masalah.</div>
+        </div>
+      </div>
+
+      <div class="rule-item rule-item-ok" style="animation-delay:0.35s">
+        <div class="rule-num rule-num-green">✓</div>
+        <div class="rule-content">
+          <div class="rule-title">✅ Kejujuran Adalah Segalanya</div>
+          <div class="rule-desc">Kerjakan ujian dengan jujur dan mandiri. Hasil yang kamu dapat mencerminkan kemampuan sesungguhnya kamu!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot confirm -->
+    <div class="chat-wrap">
+      <div class="chat-bot" style="animation-delay:0.4s">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble bot-bubble">
+          Sudah siap? Klik tombol di bawah untuk memulai ujian. 
+          <strong>Semangat ya!</strong> 💪🎯
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkbox confirm -->
+    <div class="confirm-box">
+      <label class="confirm-label">
+        <input type="checkbox" id="agree-check" onchange="toggleBtn()"/>
+        <span class="confirm-checkmark"></span>
+        <span>Saya telah membaca dan memahami semua peraturan ujian di atas</span>
+      </label>
+    </div>
+
+    <!-- CTA Button -->
+    <button class="btn-start" id="start-btn" onclick="startExam()" disabled>
+      <span class="btn-start-icon">🚀</span>
+      <span>Mulai Ujian Sekarang!</span>
+    </button>
+
+    <div class="rules-footer">
+      <span>🤖 ExamBot</span> · Komputasi Pervasif · Context-Aware Smart Exam
+    </div>
+
+  </div>
+
+  <script>
+    // Ambil data user
+    const user = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
+    if (!user) window.location.href = 'index.html';
+
+    document.getElementById('student-name-chat').textContent = user.nama;
+
+    // Greeting by time
+    const hr = new Date().getHours();
+    let greet = hr < 11 ? 'Selamat Pagi! ☀️' : hr < 15 ? 'Selamat Siang! 🌤️' : hr < 18 ? 'Selamat Sore! 🌅' : 'Selamat Malam! 🌙';
+    document.getElementById('greeting-text').textContent = greet + ' ' + user.nama;
+
+    function toggleBtn() {
+      document.getElementById('start-btn').disabled = !document.getElementById('agree-check').checked;
+    }
+    function startExam() {
+      window.location.href = 'exam.html';
+    }
+  </script>
+</body>
+</html>

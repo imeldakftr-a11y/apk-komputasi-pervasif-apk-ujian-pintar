@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Ujian | Hasil Ujian</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/result.css"/>
+</head>
+<body class="result-page">
+
+  <div class="res-bg">
+    <div class="res-blob res-blob-1"></div>
+    <div class="res-blob res-blob-2"></div>
+    <div class="res-blob res-blob-3"></div>
+  </div>
+
+  <div class="res-wrap">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="hero-top">
+        <div class="hero-icon" id="result-icon">🎉</div>
+        <div class="hero-info">
+          <h1>Hasil Ujian</h1>
+          <div class="hero-student" id="student-result-name"></div>
+        </div>
+      </div>
+      <div class="hero-body">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 150 150">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#818cf8"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-bg" cx="75" cy="75" r="62"/>
+            <circle class="ring-fill" id="ring-fill" cx="75" cy="75" r="62"
+              stroke-dasharray="390" stroke-dashoffset="390"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-score" id="score-number">0</div>
+            <div class="ring-label">/100</div>
+          </div>
+        </div>
+        <div class="grade-wrap">
+          <div class="grade-badge" id="grade-badge">—</div>
+          <div class="grade-title" id="grade-title"></div>
+          <div class="grade-sub"   id="grade-sub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card stat-green">
+        <div class="stat-icon">✅</div>
+        <div class="stat-num" id="correct-count">0</div>
+        <div class="stat-lbl">Benar</div>
+      </div>
+      <div class="stat-card stat-red">
+        <div class="stat-icon">❌</div>
+        <div class="stat-num" id="wrong-count">0</div>
+        <div class="stat-lbl">Salah</div>
+      </div>
+      <div class="stat-card stat-gray">
+        <div class="stat-icon">⬜</div>
+        <div class="stat-num" id="unanswered-count">0</div>
+        <div class="stat-lbl">Kosong</div>
+      </div>
+      <div class="stat-card stat-blue">
+        <div class="stat-icon">⏱</div>
+        <div class="stat-num" id="time-used-display">-</div>
+        <div class="stat-lbl">Waktu</div>
+      </div>
+    </div>
+
+    <!-- VIOLATION -->
+    <div class="section-card">
+      <div class="section-head" style="background:rgba(239,68,68,0.08);border-bottom-color:rgba(239,68,68,0.12)">
+        <span class="section-icon">🚨</span>
+        <span>Laporan Pelanggaran</span>
+        <span class="section-badge" id="vio-badge">0 pelanggaran</span>
+      </div>
+      <div class="vio-grid">
+        <div class="vio-item">
+          <div class="vio-left">
+            <div class="vio-dot dot-blue"></div>
+            <div>
+              <div class="vio-name">Pindah Tab</div>
+              <div class="vio-desc">Batas maksimal 2 kali</div>
+            </div>
+          </div>
+          <div class="vio-val" id="v-tab">0 kali</div>
+        </div>
+        <div class="vio-item">
+          <div class="vio-left">
+            <div class="vio-dot dot-purple"></div>
+            <div>
+              <div class="vio-name">Total Waktu AFK</div>
+              <div class="vio-desc">Diam tanpa aktivitas</div>
+            </div>
+          </div>
+          <div class="vio-val" id="v-afk">0 detik</div>
+        </div>
+        <div class="vio-item">
+          <div class="vio-left">
+            <div class="vio-dot dot-green"></div>
+            <div>
+              <div class="vio-name">Status Akhir</div>
+              <div class="vio-desc">Kondisi akun setelah ujian</div>
+            </div>
+          </div>
+          <div class="vio-status-badge" id="v-status">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOG -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-icon">📋</span>
+        <span>Log Aktivitas Ujian</span>
+      </div>
+      <div id="log-container" class="log-list"></div>
+    </div>
+
+    <!-- REVIEW -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-icon">📖</span>
+        <span>Review Jawaban</span>
+      </div>
+      <div id="review-container"></div>
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice-card">
+      <div class="notice-icon">📢</div>
+      <div class="notice-content">
+        <div class="notice-title">Perhatian!</div>
+        <div class="notice-text">
+          Jangan menutup atau kembali dari halaman ini.
+          Segera <strong>tunjukkan layar ini kepada pengawas</strong> untuk melaporkan hasil ujian Anda.
+          Pengawas akan mencatat hasil dan memberikan konfirmasi. 🙏
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/result.js"></script>
+</body>
+</html>

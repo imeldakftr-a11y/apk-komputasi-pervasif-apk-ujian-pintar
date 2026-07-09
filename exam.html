@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Ujian | Soal Ujian</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/theme.js"></script>
+</head>
+<body class="exam-page">
+
+  <div class="watermark">E-UJIAN PROTECTED</div>
+
+  <!-- Header -->
+  <header class="exam-header">
+    <div class="exam-header-left">
+      <span class="exam-logo">🎓</span>
+      <span class="exam-title">E-Ujian Online</span>
+      <span id="student-name-display" class="student-badge"></span>
+    </div>
+    <div class="exam-header-right">
+      <button class="btn-theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()">🌙 Gelap</button>
+      <button class="btn-cat-refresh" id="cat-refresh-btn" onclick="startCatRefresh()" title="Istirahat sejenak bersama kucing">
+        🐱 Refreshing <span id="cat-refresh-count">(3x)</span>
+      </button>
+      <div class="timer-box" id="timer-box">⏱ <span id="timer">10:00</span></div>
+    </div>
+  </header>
+
+  <!-- Status Bar -->
+  <div id="status-bar" class="status-bar status-ok">
+    <span id="status-icon">✅</span>
+    <span id="status-text">Ujian Berjalan — Selamat mengerjakan!</span>
+    <div class="status-right">
+      <span class="badge badge-red" id="tab-badge">🔖 Tab: 0/2</span>
+      <span class="badge" id="afk-badge">⏳ AFK: 0 dtk</span>
+    </div>
+  </div>
+
+  <!-- Overlay: Tab Warning -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-icon" id="overlay-icon">⚠️</div>
+      <h2 id="overlay-title">Peringatan!</h2>
+      <p id="overlay-message"></p>
+      <button class="btn-primary" onclick="dismissOverlay()">Kembali ke Ujian</button>
+    </div>
+  </div>
+
+  <!-- Overlay: Locked -->
+  <div id="lock-overlay" class="overlay lock-overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-icon">🔒</div>
+      <h2>Akses Diblokir!</h2>
+      <p>Anda pindah tab sebanyak <strong id="lock-count"></strong> kali. Batas maksimal 2 kali. Ujian Anda otomatis dikumpulkan dan akun diblokir dari sesi ini.</p>
+      <button class="btn-danger" onclick="submitExam(true)">Lihat Hasil →</button>
+    </div>
+  </div>
+
+  <!-- Overlay: AFK Warning -->
+  <div id="afk-overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-icon">😴</div>
+      <h2>Tidak Ada Aktivitas!</h2>
+      <p>Anda terdeteksi tidak aktif. Ujian akan <strong>otomatis dikumpulkan</strong> dalam:</p>
+      <div class="afk-countdown" id="afk-countdown">10</div>
+      <p class="afk-subtitle">Gerakkan mouse atau tekan tombol apa saja untuk membatalkan.</p>
+    </div>
+  </div>
+
+  <!-- Overlay: Cat Refreshing Break -->
+  <div id="cat-overlay" class="overlay hidden">
+    <div class="overlay-card cat-card">
+      <div class="cat-anim" id="cat-anim">🐱</div>
+      <h2>Meong~ Waktunya Refreshing!</h2>
+      <p>Tarik napas sejenak. Timer ujian dijeda selama kucing menemanimu.</p>
+      <div class="cat-countdown" id="cat-countdown">10</div>
+      <p class="afk-subtitle">Sisa kesempatan refreshing: <strong id="cat-overlay-left"></strong></p>
+    </div>
+  </div>
+
+  <!-- Overlay: Confirm Before Submit -->
+  <div id="confirm-submit-overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-icon">🤔</div>
+      <h2>Yakin dengan Jawabanmu?</h2>
+      <p id="confirm-submit-message"></p>
+      <div class="confirm-btn-row">
+        <button class="btn-secondary" onclick="closeConfirmSubmit()">↩️ Periksa Lagi</button>
+        <button class="btn-danger" onclick="confirmSubmit()">✅ Ya, Kumpulkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Navigator: Soal Belum Diisi -->
+  <button class="fab-navigator" id="fab-navigator" onclick="toggleNavigator()" title="Lihat soal yang belum diisi">
+    📋<span class="fab-badge" id="unanswered-badge">0</span>
+  </button>
+
+  <div class="navigator-panel hidden" id="navigator-panel">
+    <div class="navigator-header">
+      <h3>📋 Soal Belum Diisi</h3>
+      <button class="navigator-close" onclick="toggleNavigator()">✕</button>
+    </div>
+    <div class="navigator-grid" id="navigator-grid"></div>
+  </div>
+
+  <!-- Main -->
+  <main class="exam-main">
+    <div class="exam-info">
+      <h2>📝 Soal Pilihan Ganda</h2>
+      <p>Jawab semua soal di bawah ini. Sistem memantau aktivitas & tab browser Anda secara real-time.</p>
+      <div class="exam-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        <div class="progress-text" id="progress-text">0 dari 5 soal dijawab</div>
+      </div>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <div class="submit-section">
+      <button class="btn-submit" onclick="askConfirmSubmit()">✅ Kumpulkan Jawaban</button>
+    </div>
+  </main>
+
+  <script src="js/questions.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>

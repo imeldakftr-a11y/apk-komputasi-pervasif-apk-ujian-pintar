@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Ujian | Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="login-page">
+
+  <button class="btn-theme-toggle-fixed" id="theme-toggle-btn" onclick="toggleTheme()">🌙 Gelap</button>
+
+  <!-- Floating bubbles -->
+  <div class="bubbles-bg" id="bubbles"></div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">🎓</div>
+      <h1>E-Ujian Online</h1>
+      <p class="subtitle">Sistem Ujian Cerdas Berbasis Komputasi Pervasif</p>
+    </div>
+
+    <div id="error-msg" class="alert alert-error hidden"></div>
+
+    <div class="form-group">
+      <label>🪪 NIM</label>
+      <input type="text" id="nim" placeholder="Contoh: 230741117" autocomplete="off"/>
+    </div>
+    <div class="form-group">
+      <label>👤 Nama</label>
+      <input type="text" id="nama-input" placeholder="Masukkan nama lengkap Anda"/>
+    </div>
+
+    <button class="btn-primary" id="login-btn" onclick="handleLogin()">Mulai Ujian 🚀</button>
+
+    <div class="login-footer">
+      Komputasi Pervasif • <span>Context-Aware Smart Exam</span>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script>
+    // Generate floating bubbles
+    const bg = document.getElementById('bubbles');
+    for(let i=0;i<14;i++){
+      const b=document.createElement('div'); b.className='bubble';
+      const size=40+Math.random()*120;
+      b.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:-${size}px;animation-duration:${8+Math.random()*14}s;animation-delay:${Math.random()*10}s;`;
+      bg.appendChild(b);
+    }
+  </script>
+</body>
+</html>
